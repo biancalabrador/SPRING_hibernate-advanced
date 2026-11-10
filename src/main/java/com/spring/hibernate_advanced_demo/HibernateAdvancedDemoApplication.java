@@ -32,7 +32,9 @@ public class HibernateAdvancedDemoApplication {
       // findCoursesForInstructor(app);
       // findInstructorWithCoursesJoinFetch(app);
       // updateInstructor(app);
-      createCourseAndReviews(app);
+      // createCourseAndReviews(app);
+      // retrieveCourseAndReviews(app);
+      deleteCourseAndReviews(app);
     };
   }
 
@@ -126,12 +128,29 @@ public class HibernateAdvancedDemoApplication {
   //   app.update(ins);
   // }
 
-  private void createCourseAndReviews(AppDao app) {
-    Course course = new Course("How to Speed Run Spring in 1 Day");
-    course.addReview(new Review("Great speed 2x... loved it!"));
-    course.addReview(new Review("Amen"));
-    course.addReview(new Review("Kachow"));
-    System.out.println("Course saved!");
-    app.save(course);
+  // private void createCourseAndReviews(AppDao app) {
+  //   Course course = new Course("How to Speed Run Spring in 1 Day");
+  //   course.addReview(new Review("Great speed 2x... loved it!"));
+  //   course.addReview(new Review("Amen"));
+  //   course.addReview(new Review("Kachow"));
+  //   System.out.println("Course saved!");
+  //   app.save(course);
+  // }
+
+  // private void retrieveCourseAndReviews(AppDao app) {
+  //   int id = 6;
+  //   System.out.println("Get course and reviews from id: " + id);
+  //   Course course = app.findCourseAndReviewsByCourseId(id);
+  //   System.out.println(course);
+  //   System.out.println(course.getReview());
+  // }
+
+  private void deleteCourseAndReviews(AppDao app) {
+    int id = 4;
+    System.out.println("Delete course: " + id);
+    app.deleteCourseById(id);
+    System.out.println("Deleted successfully!");
   }
+
+
 }
