@@ -9,6 +9,9 @@ import com.spring.hibernate_advanced_demo.entity.Course;
 import com.spring.hibernate_advanced_demo.entity.Instructor;
 import com.spring.hibernate_advanced_demo.entity.InstructorDetail;
 import com.spring.hibernate_advanced_demo.entity.Review;
+import com.spring.hibernate_advanced_demo.entity.Student;
+
+import tools.jackson.databind.jsontype.impl.StdSubtypeResolver;
 
 import java.util.List;
 
@@ -34,7 +37,8 @@ public class HibernateAdvancedDemoApplication {
       // updateInstructor(app);
       // createCourseAndReviews(app);
       // retrieveCourseAndReviews(app);
-      deleteCourseAndReviews(app);
+      // deleteCourseAndReviews(app);
+      createCourseAndStudents(app);
     };
   }
 
@@ -145,12 +149,20 @@ public class HibernateAdvancedDemoApplication {
   //   System.out.println(course.getReview());
   // }
 
-  private void deleteCourseAndReviews(AppDao app) {
-    int id = 4;
-    System.out.println("Delete course: " + id);
-    app.deleteCourseById(id);
-    System.out.println("Deleted successfully!");
+  // private void deleteCourseAndReviews(AppDao app) {
+  //   int id = 4;
+  //   System.out.println("Delete course: " + id);
+  //   app.deleteCourseById(id);
+  //   System.out.println("Deleted successfully!");
+  // }
+
+  private void createCourseAndStudents(AppDao app) {
+    Course course = new Course("How To Sleep");
+    Student student1 = new Student("Mikasa", "Ackerman", "mikasa@example.com");
+    Student student2 = new Student("Levi", "Ackerman", "levi@example.com");
+    course.addStudent(student1);
+    course.addStudent(student2);
+    app.save(course);
+    System.out.println("Successfully enrolled!");
   }
-
-
 }
