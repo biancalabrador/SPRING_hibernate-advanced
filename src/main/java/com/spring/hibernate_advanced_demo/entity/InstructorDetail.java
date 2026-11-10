@@ -5,7 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.CascadeType;
 
 @Entity
 @Table(name = "instructor_detail")
@@ -21,6 +23,9 @@ public class InstructorDetail {
 
   @Column (name = "hobby")
   private String hobby;
+
+  @OneToOne (mappedBy = "instructorDetail", cascade = CascadeType.ALL)
+  private Instructor instructor;
 
   public InstructorDetail() {
   }
@@ -61,5 +66,9 @@ public class InstructorDetail {
         ", subject='" + subject + '\'' +
         ", hobby='" + hobby + '\'' +
         '}';
+  }
+
+  public Instructor getInstructor() {
+    return instructor;
   }
 }
