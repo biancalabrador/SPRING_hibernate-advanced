@@ -103,4 +103,10 @@ public class AppDaoImplement implements AppDao {
   em.remove(in);
   }
 
+  @Override 
+  @Transactional 
+  public void save(Course theCourse) {
+    em.persist(theCourse);
+  }
+
 }

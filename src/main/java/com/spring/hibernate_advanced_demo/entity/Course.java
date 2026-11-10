@@ -1,11 +1,13 @@
 package com.spring.hibernate_advanced_demo.entity;
 
-import org.hibernate.annotations.DialectOverride.GeneratedColumn;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +25,9 @@ public class Course {
 
   @Column (name = "title")
   private String title;
+
+  @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+  private List<Review> review;
 
   @ManyToOne (cascade = {
     CascadeType.DETACH,
@@ -64,11 +69,25 @@ public class Course {
     return instructor;
   }
 
+  public List<Review> getReview() {
+    return review;
+  }
+
+  public void setReview(List<Review> review) {
+    this.review = review;
+  }
+
   @Override
   public String toString() {
     return "Course [id=" + id + ", title=" + title + "]";
   }
 
-  
+  public void addReview(Review rev) {
+    if(review == null){
+      review = new ArrayList<>();
+    }
+    review.add(rev);
+    rev.setCourse(this);
+  }
 
 }

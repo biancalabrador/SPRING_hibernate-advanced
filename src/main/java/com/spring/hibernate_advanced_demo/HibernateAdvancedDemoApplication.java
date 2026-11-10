@@ -8,6 +8,8 @@ import com.spring.hibernate_advanced_demo.dao.AppDao;
 import com.spring.hibernate_advanced_demo.entity.Course;
 import com.spring.hibernate_advanced_demo.entity.Instructor;
 import com.spring.hibernate_advanced_demo.entity.InstructorDetail;
+import com.spring.hibernate_advanced_demo.entity.Review;
+
 import java.util.List;
 
 @SpringBootApplication
@@ -29,7 +31,8 @@ public class HibernateAdvancedDemoApplication {
       // findInstructorWithCourses(app);
       // findCoursesForInstructor(app);
       // findInstructorWithCoursesJoinFetch(app);
-      updateInstructor(app);
+      // updateInstructor(app);
+      createCourseAndReviews(app);
     };
   }
 
@@ -114,12 +117,21 @@ public class HibernateAdvancedDemoApplication {
   //   System.out.println("Courses: " + ins.getCourses());
   // }
 
-  private void updateInstructor(AppDao app) {
-    int id = 7;
-    System.out.println("Find instructor id: " + id);
-    Instructor ins = app.findInstructorById(id);
-    ins.setLastName("Reeves");
-    System.out.println("Updated!");
-    app.update(ins);
+  // private void updateInstructor(AppDao app) {
+  //   int id = 7;
+  //   System.out.println("Find instructor id: " + id);
+  //   Instructor ins = app.findInstructorById(id);
+  //   ins.setLastName("Reeves");
+  //   System.out.println("Updated!");
+  //   app.update(ins);
+  // }
+
+  private void createCourseAndReviews(AppDao app) {
+    Course course = new Course("How to Speed Run Spring in 1 Day");
+    course.addReview(new Review("Great speed 2x... loved it!"));
+    course.addReview(new Review("Amen"));
+    course.addReview(new Review("Kachow"));
+    System.out.println("Course saved!");
+    app.save(course);
   }
 }
