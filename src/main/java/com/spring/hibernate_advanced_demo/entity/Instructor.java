@@ -7,8 +7,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity 
 @Table(name = "instructor")
@@ -31,6 +34,14 @@ public class Instructor {
   @OneToOne (cascade = CascadeType.ALL)
   @JoinColumn (name = "instructor_detail_id")
   private InstructorDetail instructorDetail;
+
+  @OneToMany (mappedBy = "instructor", cascade = {
+    CascadeType.DETACH,
+    CascadeType.MERGE,
+    CascadeType.PERSIST,
+    CascadeType.REFRESH
+  })
+  private List<Course> courses;
 
   public Instructor() {
   }
@@ -91,4 +102,13 @@ public class Instructor {
         ", instructorDetail=" + instructorDetail +
         '}';
   }
+
+  public void addCourse(Course theCourse) {
+    if (courses == null) {
+      courses = new ArrayList<>();
+    }
+    courses.add(theCourse);
+    theCourse.setInstructor(this);
+  }
+
 }

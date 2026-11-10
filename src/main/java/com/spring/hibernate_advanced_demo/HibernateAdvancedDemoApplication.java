@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.boot.CommandLineRunner;
 import com.spring.hibernate_advanced_demo.dao.AppDao;
+import com.spring.hibernate_advanced_demo.entity.Course;
 import com.spring.hibernate_advanced_demo.entity.Instructor;
 import com.spring.hibernate_advanced_demo.entity.InstructorDetail;
 
@@ -22,7 +23,8 @@ public class HibernateAdvancedDemoApplication {
       // findInstructor(app);
       // deleteInstructor(app);
       // findInstructorDetail(app);
-      deleteInstructorDetail(app);
+      // deleteInstructorDetail(app);
+      createInstructorWithCourses(app);
     };
   }
 
@@ -60,10 +62,29 @@ public class HibernateAdvancedDemoApplication {
   //   System.out.println("Instructor: " + inDeets.getInstructor());
   // }
 
-  private void deleteInstructorDetail(AppDao app) {
-    int id = 2;
-    System.out.println("Deleting instructor details with id: " + id);
-    app.deleteInstructorDetail(id);
-    System.out.println("Instructor details deleted!");
+  // private void deleteInstructorDetail(AppDao app) {
+  //   int id = 2;
+  //   System.out.println("Deleting instructor details with id: " + id);
+  //   app.deleteInstructorDetail(id);
+  //   System.out.println("Instructor details deleted!");
+  // }
+
+  private void createInstructorWithCourses(AppDao app) {
+    Instructor ins = new Instructor("Keanu",
+                                    "Andal",
+                                    "kiyanoreeves@example.com");
+    InstructorDetail deets = new InstructorDetail("Esports",
+                                    "Gaming");
+    ins.setInstructorDetail(deets);
+
+    Course course1 = new Course("CS:GO");
+    Course course2 = new Course("Valorant");
+
+    ins.addCourse(course1);
+    ins.addCourse(course2);
+
+    System.out.println("Saving instructor: " + ins);
+    app.save(ins);
   }
+
 }
