@@ -115,4 +115,12 @@ public class Instructor {
     theCourse.setInstructor(this);
   }
 
+  public void setCourses(List<Course> courses2) {
+    this.courses = courses2;
+  }
+
+  public List<Course> getCourses() {
+    return courses;
+  }
+
 }

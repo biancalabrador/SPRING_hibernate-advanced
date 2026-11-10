@@ -40,8 +40,35 @@ public class Course {
     this.title = title;
   }
 
-  public Instructor setInstructor(Instructor instructor2) {
-    return this.instructor = instructor2;
+  public void setInstructor(Instructor instructor2) {
+    this.instructor = instructor2;
   }
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public Instructor getInstructor() {
+    return instructor;
+  }
+
+  @Override
+  public String toString() {
+    return "Course [id=" + id + ", title=" + title + "]";
+  }
+
+  
 
 }

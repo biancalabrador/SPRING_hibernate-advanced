@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
 import com.spring.hibernate_advanced_demo.entity.Course;
 import com.spring.hibernate_advanced_demo.entity.Instructor;
 import com.spring.hibernate_advanced_demo.entity.InstructorDetail;
 import com.spring.hibernate_advanced_demo.dao.AppDao;
+
 
 @Repository 
 public class AppDaoImplement implements AppDao {
@@ -60,7 +62,27 @@ public class AppDaoImplement implements AppDao {
 
   @Override
   public List<Course> findCoursesByInstructorId(int theId) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'findCoursesByInstructorId'");
+
+    TypedQuery<Course> query = em.createQuery(
+      "FROM Course WHERE instructor.id=:data",
+      Course.class
+    );
+    query.setParameter("data", theId);
+    List<Course> course = query.getResultList();
+    return course;
+  }
+
+  @Override 
+  public Instructor findInstructorByIdJoinFetch(int theId) {
+    TypedQuery<Instructor> query = em.createQuery(
+      "SELECT i from Instructor i "
+      + "JOIN FETCH i.courses "
+      + "JOIN FETCH i.instructorDetail "
+      + "WHERE i.id=:data",
+      Instructor.class
+    );
+    query.setParameter("data", theId);
+    Instructor in = query.getSingleResult();
+    return in;
   }
 }

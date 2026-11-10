@@ -27,7 +27,8 @@ public class HibernateAdvancedDemoApplication {
       // deleteInstructorDetail(app);
       // createInstructorWithCourses(app);
       // findInstructorWithCourses(app);
-      findCoursesForInstructor(app);
+      // findCoursesForInstructor(app);
+      findInstructorWithCoursesJoinFetch(app);
     };
   }
 
@@ -93,14 +94,24 @@ public class HibernateAdvancedDemoApplication {
   //   System.out.println("Courses: " + ins.getClass());
   // }
 
-  private void findCoursesForInstructor(AppDao app) {
-    int id = 2;
+  // private void findCoursesForInstructor(AppDao app) {
+  //   int id = 2;
+  //   System.out.println("Find instructor id: " + id);
+  //   Instructor ins = app.findInstructorById(id);
+  //   System.out.println("Instructor: " + ins);
+  //   System.out.println("Courses from id: " + id);
+  //   List<Course> courses = app.findCoursesByInstructorId(id);
+  //   ins.setCourses(courses);
+  //   System.out.println(ins.getCourses());
+  // }
+
+  private void findInstructorWithCoursesJoinFetch(AppDao app) {
+    int id = 7;
     System.out.println("Find instructor id: " + id);
-    Instructor ins = app.findInstructorById(id);
+    Instructor ins = app.findInstructorByIdJoinFetch(id);
     System.out.println("Instructor: " + ins);
-    System.out.println("Courses from id: " + id);
-    List<Course> courses = app.findCoursesByInstructorId(id);
-    System.out.println(courses);
+    System.out.println("Courses: " + ins.getCourses());
   }
+
 
 }
