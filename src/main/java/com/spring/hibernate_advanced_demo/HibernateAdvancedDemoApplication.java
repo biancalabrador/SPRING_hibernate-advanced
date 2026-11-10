@@ -61,9 +61,9 @@ public class HibernateAdvancedDemoApplication {
   // }
 
   private void deleteInstructorDetail(AppDao app) {
-    int id = 5;
+    int id = 2;
     System.out.println("Deleting instructor details with id: " + id);
-    app.deleteInstructorDetailById(id);
+    app.deleteInstructorDetail(id);
     System.out.println("Instructor details deleted!");
   }
 }

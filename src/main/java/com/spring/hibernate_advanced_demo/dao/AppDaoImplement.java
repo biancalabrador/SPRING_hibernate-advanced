@@ -46,4 +46,11 @@ public class AppDaoImplement implements AppDao {
     em.remove(inDeets);
   }
 
+  @Override 
+  @Transactional 
+  public void deleteInstructorDetail(int theId) {
+    InstructorDetail deets = em.find(InstructorDetail.class, theId);
+    deets.getInstructor().setInstructorDetail(null);
+    em.remove(deets);
+  }
 }
