@@ -8,6 +8,7 @@ import com.spring.hibernate_advanced_demo.dao.AppDao;
 import com.spring.hibernate_advanced_demo.entity.Course;
 import com.spring.hibernate_advanced_demo.entity.Instructor;
 import com.spring.hibernate_advanced_demo.entity.InstructorDetail;
+import java.util.List;
 
 @SpringBootApplication
 public class HibernateAdvancedDemoApplication {
@@ -24,7 +25,9 @@ public class HibernateAdvancedDemoApplication {
       // deleteInstructor(app);
       // findInstructorDetail(app);
       // deleteInstructorDetail(app);
-      createInstructorWithCourses(app);
+      // createInstructorWithCourses(app);
+      // findInstructorWithCourses(app);
+      findCoursesForInstructor(app);
     };
   }
 
@@ -34,9 +37,7 @@ public class HibernateAdvancedDemoApplication {
   //                                   "maxverstappen@example.com");
   //   InstructorDetail deets = new InstructorDetail("Quantum",
   //                                   "Kpop");
-
   //   ins.setInstructorDetail(deets);
-
   //   System.out.println("Information saved!");
   //   app.save(ins);
   // }
@@ -69,22 +70,37 @@ public class HibernateAdvancedDemoApplication {
   //   System.out.println("Instructor details deleted!");
   // }
 
-  private void createInstructorWithCourses(AppDao app) {
-    Instructor ins = new Instructor("Keanu",
-                                    "Andal",
-                                    "kiyanoreeves@example.com");
-    InstructorDetail deets = new InstructorDetail("Esports",
-                                    "Gaming");
-    ins.setInstructorDetail(deets);
+  // private void createInstructorWithCourses(AppDao app) {
+  //   Instructor ins = new Instructor("Farrah",
+  //                                   "Magana",
+  //                                   "farrahway@example.com");
+  //   InstructorDetail deets = new InstructorDetail("Leadership",
+  //                                   "Reading");
+  //   ins.setInstructorDetail(deets);
+  //   Course course1 = new Course("SRA");
+  //   Course course2 = new Course("English");
+  //   ins.addCourse(course1);
+  //   ins.addCourse(course2);
+  //   System.out.println("Saving instructor: " + ins);
+  //   app.save(ins);
+  // }
 
-    Course course1 = new Course("CS:GO");
-    Course course2 = new Course("Valorant");
+  // private void findInstructorWithCourses(AppDao app) {
+  //   int id = 8;
+  //   System.out.println("Finding instructor with id: " + id);
+  //   Instructor ins = app.findInstructorById(id);
+  //   System.out.println("Instructor: " + ins);
+  //   System.out.println("Courses: " + ins.getClass());
+  // }
 
-    ins.addCourse(course1);
-    ins.addCourse(course2);
-
-    System.out.println("Saving instructor: " + ins);
-    app.save(ins);
+  private void findCoursesForInstructor(AppDao app) {
+    int id = 2;
+    System.out.println("Find instructor id: " + id);
+    Instructor ins = app.findInstructorById(id);
+    System.out.println("Instructor: " + ins);
+    System.out.println("Courses from id: " + id);
+    List<Course> courses = app.findCoursesByInstructorId(id);
+    System.out.println(courses);
   }
 
 }

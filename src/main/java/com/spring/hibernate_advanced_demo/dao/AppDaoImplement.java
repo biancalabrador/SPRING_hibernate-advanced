@@ -1,8 +1,12 @@
 package com.spring.hibernate_advanced_demo.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
+
+import com.spring.hibernate_advanced_demo.entity.Course;
 import com.spring.hibernate_advanced_demo.entity.Instructor;
 import com.spring.hibernate_advanced_demo.entity.InstructorDetail;
 import com.spring.hibernate_advanced_demo.dao.AppDao;
@@ -52,5 +56,11 @@ public class AppDaoImplement implements AppDao {
     InstructorDetail deets = em.find(InstructorDetail.class, theId);
     deets.getInstructor().setInstructorDetail(null);
     em.remove(deets);
+  }
+
+  @Override
+  public List<Course> findCoursesByInstructorId(int theId) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'findCoursesByInstructorId'");
   }
 }
