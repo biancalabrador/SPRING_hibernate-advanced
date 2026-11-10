@@ -33,12 +33,12 @@ public class AppDaoImplement implements AppDao {
       return em.find(Instructor.class, theId);
     }
 
-  @Override
-  @Transactional
-  public void deleteInstructorById(int theId) {
-    Instructor in = em.find(Instructor.class, theId);
-      em.remove(in);
-  }
+  // @Override
+  // @Transactional
+  // public void deleteInstructorById(int theId) {
+  //   Instructor in = em.find(Instructor.class, theId);
+  //     em.remove(in);
+  // }
 
   @Override
   public InstructorDetail findInstructorDetailById(int theId) {
@@ -85,4 +85,22 @@ public class AppDaoImplement implements AppDao {
     Instructor in = query.getSingleResult();
     return in;
   }
+
+  @Override 
+  @Transactional 
+  public void update(Instructor in){
+    em.merge(in);
+  }
+
+  @Override 
+  @Transactional 
+  public void deleteInstructorById(int theId){
+  Instructor in = em.find(Instructor.class, theId);
+  List<Course> course = in.getCourses();
+  for(Course c:course){
+    c.setInstructor(null);
+  }
+  em.remove(in);
+  }
+
 }
