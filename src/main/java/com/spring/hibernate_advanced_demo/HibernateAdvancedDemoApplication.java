@@ -40,7 +40,9 @@ public class HibernateAdvancedDemoApplication {
       // deleteCourseAndReviews(app);
       // createCourseAndStudents(app);
       // findStudentAndCourses(app);
-      addMoreCoursesForStudent(app);
+      // addMoreCoursesForStudent(app);
+      // deleteCourseById(app);
+      deleteStudent(app);
     };
   }
 
@@ -175,18 +177,30 @@ public class HibernateAdvancedDemoApplication {
   //   System.out.println("Courses: " + student.getCourses());
   // }
 
-  private void addMoreCoursesForStudent(AppDao app) {
-    int id = 21;
-    Student student = app.findStudentAndCoursesByStudentId(id);
-    Course course1 = new Course("How to Use ODM Gear");
-    Course course2 = new Course("Shinzou wo sasageyo");
-    Course course3 = new Course("Ereh Yeager");
-    student.addCourse(course1);
-    student.addCourse(course2);
-    student.addCourse(course3);
-    System.out.println("Successfully enrolled to new courses.");
-    app.update(student);
+  // private void addMoreCoursesForStudent(AppDao app) {
+  //   int id = 21;
+  //   Student student = app.findStudentAndCoursesByStudentId(id);
+  //   Course course1 = new Course("How to Use ODM Gear");
+  //   Course course2 = new Course("Shinzou wo sasageyo");
+  //   Course course3 = new Course("Ereh Yeager");
+  //   student.addCourse(course1);
+  //   student.addCourse(course2);
+  //   student.addCourse(course3);
+  //   System.out.println("Successfully enrolled to new courses.");
+  //   app.update(student);
+  // }
+
+  // private void deleteCourseById(AppDao app) {
+  //   int id = 23;
+  //   System.out.println("Delete course: " + id);
+  //   app.deleteCourseById(id);
+  //   System.out.println("Deleted succesfully!");
+  // }
+
+  private void deleteStudent(AppDao app) {
+    int id = 1;
+    System.out.println("Delete student: " + id);
+    app.deleteStudentById(id);
+    System.out.println("Deleted successfully!");
   }
-
-
 }
