@@ -44,4 +44,9 @@ public class Review {
     this.comments = rev.comments;
   }
 
+  @Override
+  public String toString() {
+    return "Review [id=" + id + ", comments=" + comments + "]";
+  }
+
 }

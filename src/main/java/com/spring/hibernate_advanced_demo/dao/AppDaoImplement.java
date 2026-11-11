@@ -134,7 +134,7 @@ public class AppDaoImplement implements AppDao {
   public Course findCourseAndStudentByCourseId(int theId) {
     TypedQuery<Course> query = em.createQuery(
       "SELECT c FROM Course c "
-      + "JOIN FETCH c.stduents "
+      + "JOIN FETCH c.students "
       + "WHERE c.id=:data",
       Course.class);
     query.setParameter("data", theId);
