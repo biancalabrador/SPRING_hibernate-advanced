@@ -10,6 +10,7 @@ import jakarta.transaction.Transactional;
 import com.spring.hibernate_advanced_demo.entity.Course;
 import com.spring.hibernate_advanced_demo.entity.Instructor;
 import com.spring.hibernate_advanced_demo.entity.InstructorDetail;
+import com.spring.hibernate_advanced_demo.entity.Student;
 import com.spring.hibernate_advanced_demo.dao.AppDao;
 
 
@@ -134,11 +135,30 @@ public class AppDaoImplement implements AppDao {
     TypedQuery<Course> query = em.createQuery(
       "SELECT c FROM Course c "
       + "JOIN FETCH c.stduents "
-      + "WHERE c.id=:data"
+      + "WHERE c.id=:data",
       Course.class);
     query.setParameter("data", theId);
     Course course = query.getSingleResult();
     return course;
+  }
+
+  @Override 
+  public Student findStudentAndCoursesByStudentId(int theId){
+    TypedQuery<Student> query = em.createQuery(
+      "SELECT s FROM Student s "
+      + "JOIN FETCH s.courses "
+      +"WHERE s.id=:data",
+      Student.class
+    );
+    query.setParameter("data", theId);
+    Student student = query.getSingleResult();
+    return student;
+  }
+
+  @Override 
+  @Transactional 
+  public void update(Student student) {
+    em.merge(student);
   }
 
 }

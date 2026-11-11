@@ -50,4 +50,16 @@ public class Student {
     courses.add(course);
     course.addStudent(this);
   }
+
+  public List<Course> getCourses() {
+    return courses;
+  }
+
+  @Override
+  public String toString() {
+    return "Student [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", email=" + email
+        + ", courses=" + courses + "]";
+  }
+
+  
 }

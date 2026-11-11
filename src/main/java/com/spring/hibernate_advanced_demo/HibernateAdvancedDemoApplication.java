@@ -38,7 +38,9 @@ public class HibernateAdvancedDemoApplication {
       // createCourseAndReviews(app);
       // retrieveCourseAndReviews(app);
       // deleteCourseAndReviews(app);
-      createCourseAndStudents(app);
+      // createCourseAndStudents(app);
+      // findStudentAndCourses(app);
+      addMoreCoursesForStudent(app);
     };
   }
 
@@ -156,13 +158,35 @@ public class HibernateAdvancedDemoApplication {
   //   System.out.println("Deleted successfully!");
   // }
 
-  private void createCourseAndStudents(AppDao app) {
-    Course course = new Course("How To Sleep");
-    Student student1 = new Student("Mikasa", "Ackerman", "mikasa@example.com");
-    Student student2 = new Student("Levi", "Ackerman", "levi@example.com");
-    course.addStudent(student1);
-    course.addStudent(student2);
-    app.save(course);
-    System.out.println("Successfully enrolled!");
+  // private void createCourseAndStudents(AppDao app) {
+  //   Course course = new Course("How To Sleep");
+  //   Student student1 = new Student("Mikasa", "Ackerman", "mikasa@example.com");
+  //   Student student2 = new Student("Levi", "Ackerman", "levi@example.com");
+  //   course.addStudent(student1);
+  //   course.addStudent(student2);
+  //   app.save(course);
+  //   System.out.println("Successfully enrolled!");
+  // }
+
+  // private void findStudentAndCourses(AppDao app) {
+  //   int id = 24;
+  //   Student student = app.findStudentAndCoursesByStudentId(id);
+  //   System.out.println("Student: " + student);
+  //   System.out.println("Courses: " + student.getCourses());
+  // }
+
+  private void addMoreCoursesForStudent(AppDao app) {
+    int id = 21;
+    Student student = app.findStudentAndCoursesByStudentId(id);
+    Course course1 = new Course("How to Use ODM Gear");
+    Course course2 = new Course("Shinzou wo sasageyo");
+    Course course3 = new Course("Ereh Yeager");
+    student.addCourse(course1);
+    student.addCourse(course2);
+    student.addCourse(course3);
+    System.out.println("Successfully enrolled to new courses.");
+    app.update(student);
   }
+
+
 }
